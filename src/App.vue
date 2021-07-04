@@ -1,32 +1,42 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div>
+    <Header />
+    <div class="container">
+      <LeftAdd :addComments="addComment"></LeftAdd>
+      <RightList :coms="comments" :deleteComment="deleteComment"> </RightList>
     </div>
-    <router-view/>
   </div>
 </template>
+<script>
+import Header from '@/components/Header'
+import LeftAdd from '@/components/LeftAdd'
+import RightList from '@/components/RightList'
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+export default {
+  name: '',
+  components: { Header, LeftAdd, RightList },
+  prop: {},
+  data() {
+    return {
+      comments: [
+        { id: 1, content: 'vue np', username: '1' },
+        { id: 2, content: 'vue np11', username: '2' },
+        { id: 3, content: 'vue np11', username: '3' }
+      ]
+    }
+  },
+  activated() {},
+  watch: {},
+  created() {},
+  mounted() {},
+  methods: {
+    addComment(comment) {
+      this.comments.unshift(comment)
+    },
+    deleteComment(index) {
+      this.comments.splice(index, 1)
+    }
+  }
 }
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+</script>
+<style scoped></style>
